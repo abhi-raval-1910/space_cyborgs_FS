@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireSafe Now - Fire Safety</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        header {
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .section {
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #ff6f61;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #e65158;
+        }
+
+        nav {
+            background-color: rgba(255, 111, 97, 0.8);
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }/* ... Rest of your styles ... */
+
+        .emergency-button {
+            background-color: #ff0404;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .emergency-button:hover {
+            background-color: #f90303;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#mission">Mission</a>
+        <a href="#explore">Explore</a>
+        <a href="#login">Login</a>
+        <a href="/fire-detection.html">Fire Detection</a>
+        <a href="/about.html">About Us</a>
+    </nav>
+ <!-- ... Rest of your body content ... -->
+
+    <header>
+        <div class="container">
+            <img src="/f1.jpeg" alt="GeeksforGeeks Logo" height="100%" width="100%">
+            <h1><u>Welcome to FireSafe Now</u></h1>
+            <h4>Your Trusted Source for Fire Safety Education and Resources</h4>
+            <button class="emergency-button" onclick="reportFire()" >Report Fire</button>
+        </div>
+    </header>
+
+    <div class="container" id="mission">
+        <section class="section">
+            <h2>Our Mission</h2>
+            <p>
+              Our main mission is to give all the Users and Authorized Fire Fighters as well as Forest Department Officers to give the shortest path from the affected area to the nearest safest place and also the Time Required for the same.
+            </p>
+            <p>
+                For this click on the below button.
+            </p>
+            <a href="/mission.html" class="cta-button" target="_main">Our Mission</a>
+        </section>
+    </div>
+
+    <div class="container" id="explore">
+        <section class="section">
+             <h2>Explore FireSafe Now</h2>
+            <p>Access articles, videos, and guides covering essential fire safety topics, including home fire prevention, evacuation plans, and fire extinguisher usage.</p>
+            <p>Discover community events, workshops, and campaigns aimed at promoting fire safety awareness and engagement.</p>
+            <p>Find downloadable guides, checklists, and infographics to assist you in creating a fire-safe environment at home and work.</p>
+            <p>Stay updated with the latest news and insights on fire safety, wildfires, and industry advancements.</p>
+            <a href="/blog.html" class="cta-button" target="_main">Explore More</a>
+        </section>
+    </div>
+
+    <div class="container" id="login">
+        <section class="section">
+            <h2>Join Our Fire Safety Community</h2>
+            <p>Sign up to receive our newsletter and become part of our fire safety community. Stay informed, engaged, and empowered to make a difference.</p>
+            <a href="/login_page.html" class="cta-button" target="_main">Login</a>
+        </section>
+    </div>
+<!-- ... Rest of your content ... -->
+
+    <script>
+        function reportFire() {
+            // Replace this with the actual action you want to take when reporting a fire
+            alert("Emergency: Reporting Fire!");
+        }
+    </script>
+</body>
+</html>

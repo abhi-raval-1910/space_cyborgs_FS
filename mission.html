@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shortest Distance and Route Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+        #distance-form {
+            text-align: center;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ff6f61;
+        }
+        #map {
+            height: 400px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Shortest Distance and Route between Two Locations</h1>
+    <form id="distance-form">
+        <label for="start-lat">Start Latitude:</label>
+        <input type="text" id="start-lat" placeholder="Enter start latitude" required>
+        <label for="start-lon">Start Longitude:</label>
+        <input type="text" id="start-lon" placeholder="Enter start longitude" required>
+        <label for="end-lat">End Latitude:</label>
+        <input type="text" id="end-lat" placeholder="Enter end latitude" required>
+        <label for="end-lon">End Longitude:</label>
+        <input type="text" id="end-lon" placeholder="Enter end longitude" required>
+        <button type="button" id="get-location">Get My Location</button>
+        <button type="submit">Calculate Distance and Route</button>
+    </form>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script>
+        var map = L.map('map').setView([0, 0], 2); // Initialize map with a default view
+        var markerStart, markerEnd, routingControl;
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Function to get user's location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    document.getElementById('start-lat').value = position.coords.latitude;
+                    document.getElementById('start-lon').value = position.coords.longitude;
+                }, function (error) {
+                    alert('Error getting location: ' + error.message);
+                });
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+        }
+
+        // Event listener for the "Get My Location" button
+        document.getElementById('get-location').addEventListener('click', function () {
+            getLocation();
+        });
+
+        // Event listener for the form submission
+        document.getElementById('distance-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get coordinates from input fields
+            var startLat = parseFloat(document.getElementById('start-lat').value);
+            var startLon = parseFloat(document.getElementById('start-lon').value);
+            var endLat = parseFloat(document.getElementById('end-lat').value);
+            var endLon = parseFloat(document.getElementById('end-lon').value);
+
+            // Remove previous markers and routing control
+            if (markerStart) {
+                map.removeLayer(markerStart);
+            }
+            if (markerEnd) {
+                map.removeLayer(markerEnd);
+            }
+            if (routingControl) {
+                map.removeControl(routingControl);
+            }
+
+            // Add markers for start and end points
+            markerStart = L.marker([startLat, startLon]).addTo(map);
+            markerEnd = L.marker([endLat, endLon]).addTo(map);
+
+            // Fit the map to the markers
+            var bounds = new L.LatLngBounds([markerStart.getLatLng(), markerEnd.getLatLng()]);
+            map.fitBounds(bounds);
+
+            // Create a routing control
+            routingControl = L.Routing.control({
+                waypoints: [
+                    L.latLng(startLat, startLon), // Start point
+                    L.latLng(endLat, endLon) // End point
+                ],
+                routeWhileDragging: true // Allows route to be recalculated while dragging waypoints
+            }).addTo(map);
+        });
+    </script>
+</body>
+</html>
